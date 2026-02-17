@@ -1,0 +1,7 @@
+button {
+  transition: background-color 0.3s ease;
+}
+
+input:focus {
+  outline: 3px solid #0055ff;
+}
