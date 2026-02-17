@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALU Student Tracker Tests</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <h1>Test Page - ALU Student Finance Tracker</h1>
+
+  <section>
+    <h2>Form Validation Tests</h2>
+    <form id="test-form">
+      <label for="test-desc">Description</label>
+      <input type="text" id="test-desc" placeholder="Enter description">
+
+      <label for="test-amount">Amount</label>
+      <input type="number" id="test-amount" placeholder="Enter amount">
+
+      <label for="test-category">Category</label>
+      <input type="text" id="test-category" placeholder="Enter category">
+
+      <label for="test-date">Date</label>
+      <input type="date" id="test-date">
+
+      <button type="submit">Submit Test</button>
+    </form>
+    <div id="test-errors" role="status" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2>Regex Search Test</h2>
+    <input type="text" id="regex-input" placeholder="Type regex pattern (e.g., coffee, \b(\w+)\s+\1\b)">
+    <button id="regex-test">Test Regex</button>
+    <div id="regex-output"></div>
+  </section>
+
+  <script type="module">
+    import { validateDescription, validateAmount, validateCategory, validateDate } from '../scripts/validators.js';
+    import { highlight } from '../scripts/search.js';
+
+
+    const form = document.getElementById('test-form');
+    const errorsDiv = document.getElementById('test-errors');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const desc = document.getElementById('test-desc').value;
+      const amount = document.getElementById('test-amount').value;
+      const category = document.getElementById('test-category').value;
+      const date = document.getElementById('test-date').value;
+
+      const errors = [];
+      if (!validateDescription(desc)) errors.push("Description invalid");
+      if (!validateAmount(amount)) errors.push("Amount invalid");
+      if (!validateCategory(category)) errors.push("Category invalid");
+      if (!validateDate(date)) errors.push("Date invalid");
+
+      errorsDiv.textContent = errors.length ? errors.join(", ") : "All inputs valid!";
+    });
+
+    const regexInput = document.getElementById('regex-input');
+    const regexOutput = document.getElementById('regex-output');
+    document.getElementById('regex-test').addEventListener('click', () => {
+      const pattern = regexInput.value;
+      const sampleText = "Lunch Coffee Coffee textbook Bus pass";
+      try {
+        const re = new RegExp(pattern, 'gi');
+        regexOutput.innerHTML = highlight(sampleText, re);
+      } catch {
+        regexOutput.textContent = "Invalid regex";
+      }
+    });
+  </script>
+</body>
+</html>
