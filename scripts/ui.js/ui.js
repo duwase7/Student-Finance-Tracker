@@ -1,20 +1,50 @@
+import { transactions, setTransactions, currency, setCurrency } from "./state.js";
+import { exportTransactions, importTransactions } from "./storage.js";
+
+function getCurrencySymbol(currency) {
+    const symbols = {
+        USD: "$",
+        EUR: "€",
+        RWF: "RWF "
+    };
+    return symbols[currency] || "$";
+}
+
 export function highlight(text, re) {
     try {
-      return text.replace(re, m => `<mark>${m}</mark>`);
+        return text.replace(re, m => `<mark>${m}</mark>`);
     } catch {
-     return text;
+        return text;
     }
 }
-import { exportTransactions, importTransactions } from "./storage.js";
-import { transactions, setTransactions } from "./state.js";
 
+export function renderTable() {
+    const tbody = document.querySelector("#transaction-table tbody");
+    tbody.innerHTML = "";
+
+    transactions.forEach(transaction => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${transaction.description}</td>
+            <td>${getCurrencySymbol(currency)}${transaction.amount}</td>
+            <td>${transaction.category}</td>
+            <td>${transaction.date}</td>
+        `;
+
+        tbody.appendChild(row);
+    });
+}
+
+/* Export button */
 document.getElementById("export-json")
-    .addEventListener("click", () => {
+    ?.addEventListener("click", () => {
         exportTransactions(transactions);
     });
 
+/* Import button */
 document.getElementById("import-json")
-    .addEventListener("change", (e) => {
+    ?.addEventListener("change", (e) => {
         const file = e.target.files[0];
         if (file) {
             importTransactions(file, (data) => {
@@ -23,13 +53,15 @@ document.getElementById("import-json")
             });
         }
     });
-    import { currency, setCurrency } from "./state.js";
 
+/* Currency selector */
 const currencySelect = document.getElementById("currency-select");
 
-currencySelect.value = currency;
+if (currencySelect) {
+    currencySelect.value = currency;
 
-currencySelect.addEventListener("change", (e) => {
-    setCurrency(e.target.value);
-    renderTable();
-});
+    currencySelect.addEventListener("change", (e) => {
+        setCurrency(e.target.value);
+        renderTable();
+    });
+}
