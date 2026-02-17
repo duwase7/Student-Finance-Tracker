@@ -23,3 +23,13 @@ document.getElementById("import-json")
             });
         }
     });
+    import { currency, setCurrency } from "./state.js";
+
+const currencySelect = document.getElementById("currency-select");
+
+currencySelect.value = currency;
+
+currencySelect.addEventListener("change", (e) => {
+    setCurrency(e.target.value);
+    renderTable();
+});
