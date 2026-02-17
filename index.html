@@ -28,6 +28,22 @@
             <button type="submit">Add Transaction</button>
           </form>
           <div id="form-errors" role="status" aria-live="polite"></div>
+          <h2>Transaction History</h2>
+
+<input type="text" id="search" placeholder="Search transactions...">
+
+<table id="transaction-table">
+    <thead>
+        <tr>
+            <th data-sort="description">Description</th>
+            <th data-sort="amount">Amount</th>
+            <th data-sort="category">Category</th>
+            <th data-sort="date">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
     </section>
     <section id="settings"></section>
     <section id="about"></section>
