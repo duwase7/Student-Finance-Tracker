@@ -1,14 +1,6 @@
 import { transactions, setTransactions, currency, setCurrency } from "./state.js";
 import { exportTransactions, importTransactions } from "./storage.js";
 
-function getCurrencySymbol(currency) {
-    const symbols = {
-        USD: "$",
-        EUR: "€",
-        RWF: "RWF "
-    };
-    return symbols[currency] || "$";
-}
 
 export function highlight(text, re) {
     try {
@@ -16,6 +8,14 @@ export function highlight(text, re) {
     } catch {
         return text;
     }
+}
+function getCurrencySymbol(currency) {
+    const symbols = {
+        USD: "$",
+        EUR: "€",
+        RWF: "RWF "
+    };
+    return symbols[currency] || "$";
 }
 
 export function renderTable() {
