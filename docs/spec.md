@@ -80,3 +80,5 @@ Amount
 Category
 Date
 Edit/Delete Buttons
+FOOTER (About + Contact Information)
+The layout will be mobile-first and adapt to tablet and desktop breakpoints using Flexbox and media queries.
