@@ -10,3 +10,17 @@ export function exportTransactions(transactions) {
 
     URL.revokeObjectURL(url);
 }
+export function importTransactions(file,callback) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            callback(data);
+        } catch (error) {
+            alert("Invalid JSON file");
+        }
+    };
+
+    reader.readAsText(file);
+}
