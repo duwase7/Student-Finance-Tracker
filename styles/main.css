@@ -8,6 +8,7 @@ html {
   font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -39,7 +40,7 @@ body {
 }
 
 header {
-  background: linear-gradient(90deg, #2e8b57, #3cb371);
+  background: linear-gradient(90deg, #003366, #cc0000);
   padding: 20px;
   color: white;
 }
@@ -107,16 +108,15 @@ form button {
 }
 
 button {
-  background-color: #3cb371;
+  background-color: #003366;
   color: white;
   border: none;
   cursor: pointer;
   font-weight: bold;
 }
 
-
 button:hover {
-  background-color: #2e8b57;
+  background-color: #cc0000;
 }
 
 input:focus,
@@ -195,4 +195,13 @@ footer {
   form button {
       width: auto;
   }
+}
+stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+stats p {
+  background: #f0f4fa;
+  border-left: 4px solid #003366;
 }
