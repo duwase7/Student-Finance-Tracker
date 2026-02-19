@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALU Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  
+    <a href="#main" class="skip-link">Skip to content</a>
+
+
+    <header>
+        <h1>ALU Student Finance Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#transactions">Transactions</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+ 
+    <main id="main">
+
+  
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div id="stats">
+                <p>Total transactions: <span id="total-count">0</span></p>
+                <p>Total spending: <span id="total-sum">0</span></p>
+                <p>Top category: <span id="top-category">-</span></p>
+                <p>
+                    Spending cap: 
+                    <input type="number" id="cap" placeholder="Set cap">
+                    <span id="cap-status" role="status" aria-live="polite"></span>
+                </p>
+            </div>
+        </section>
+
+        
+        <section id="transactions">
+            <h2>Add Transaction</h2>
+            <form id="transaction-form">
+                <label for="description">Description</label>
+                <input type="text" id="description" required>
+
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" required>
+
+                <label for="category">Category</label>
+                <input type="text" id="category" required>
+
+                <label for="date">Date</label>
+                <input type="date" id="date" required>
+
+                <button type="submit">Add Transaction</button>
+            </form>
+            <div id="form-errors" role="status" aria-live="polite"></div>
+
+            <h2>Transaction History</h2>
+            <input type="text" id="search" placeholder="Search transactions..." aria-label="Search transactions">
+
+            <table id="transaction-table">
+                <thead>
+                    <tr>
+                        <th data-sort="description">Description</th>
+                        <th data-sort="amount">Amount</th>
+                        <th data-sort="category">Category</th>
+                        <th data-sort="date">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+
+      
+        <section id="settings">
+            <h2>Settings</h2>
+
+            <div class="settings-group">
+                <h3>Data Management</h3>
+                <button id="export-json">Export JSON</button>
+                <input type="file" id="import-json" accept=".json">
+            </div>
+
+            <div class="settings-group">
+                <h3>Currency</h3>
+                <label for="currency-select">Select Currency</label>
+                <select id="currency-select">
+                    <option value="USD">$ USD</option>
+                    <option value="EUR">€ EUR</option>
+                    <option value="RWF">RWF</option>
+                </select>
+            </div>
+        </section>
+
+     
+        <section id="about">
+            <h2>About</h2>
+            <p>Purpose: Track your student spending, categorize expenses, and monitor your budget.</p>
+            <p>Contact: <a href="mailto:d.uwase7@alustudent.com">d.uwase7@alustudent.com</a> | 
+               GitHub: <a href="https://github.com/duwase7/Student-Finance-Tracker" target="_blank">Repo Link</a>
+            </p>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 Your Name | Contact: d.uwase7@alustudent.com | GitHub link</p>
+    </footer>
+
+
+    <script type="module" src="scripts/ui.js"></script>
+    <script type="module" src="scripts/state.js"></script>
+    <script type="module" src="scripts/storage.js"></script>
+    <script type="module" src="scripts/validators.js"></script>
+    <script type="module" src="scripts/search.js"></script>
+</body>
+</html>

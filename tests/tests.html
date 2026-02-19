@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALU Student Tracker - Final Tests</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <h1>ALU Student Finance Tracker - Final Test Page</h1>
+
+  <section>
+    <h2>Form Validation Tests</h2>
+    <form id="test-form">
+      <label for="test-desc">Description</label>
+      <input type="text" id="test-desc" placeholder="Enter description">
+
+      <label for="test-amount">Amount</label>
+      <input type="number" id="test-amount" placeholder="Enter amount">
+
+      <label for="test-category">Category</label>
+      <input type="text" id="test-category" placeholder="Enter category">
+
+      <label for="test-date">Date</label>
+      <input type="date" id="test-date">
+
+      <button type="submit">Submit Test</button>
+    </form>
+    <div id="test-errors" role="status" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2>Regex Search Test</h2>
+    <input type="text" id="regex-input" placeholder="Type regex pattern (e.g., coffee, \b(\w+)\s+\1\b)">
+    <button id="regex-test">Test Regex</button>
+    <div id="regex-output"></div>
+  </section>
+
+  <section>
+    <h2>Add/Edit/Delete Test</h2>
+    <button id="add-sample">Add Sample Transaction</button>
+    <table id="test-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Currency Change Test</h2>
+    <label for="test-currency">Select Currency</label>
+    <select id="test-currency">
+      <option value="USD">$ USD</option>
+      <option value="EUR">€ EUR</option>
+      <option value="RWF">RWF</option>
+    </select>
+  </section>
+
+  <script type="module">
+    import { validateDescription, validateAmount, validateCategory, validateDate } from '../scripts/validators.js';
+    import { highlight } from '../scripts/search.js';
+    import { currency, setCurrency } from '../scripts/state.js';
+
+    let testTransactions = [];
+
+    const form = document.getElementById('test-form');
+    const errorsDiv = document.getElementById('test-errors');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const desc = document.getElementById('test-desc').value;
+      const amount = document.getElementById('test-amount').value;
+      const category = document.getElementById('test-category').value;
+      const date = document.getElementById('test-date').value;
+
+      const errors = [];
+      if (!validateDescription(desc)) errors.push("Description invalid");
+      if (!validateAmount(amount)) errors.push("Amount invalid");
+      if (!validateCategory(category)) errors.push("Category invalid");
+      if (!validateDate(date)) errors.push("Date invalid");
+
+      errorsDiv.textContent = errors.length ? errors.join(", ") : "All inputs valid!";
+    });
+
+    const regexInput = document.getElementById('regex-input');
+    const regexOutput = document.getElementById('regex-output');
+    document.getElementById('regex-test').addEventListener('click', () => {
+      const pattern = regexInput.value;
+      const sampleText = "Lunch Coffee Coffee textbook Bus pass Tuition";
+      try {
+        const re = new RegExp(pattern, 'gi');
+        regexOutput.innerHTML = highlight(sampleText, re);
+      } catch {
+        regexOutput.textContent = "Invalid regex";
+      }
+    });
+
+
+    const tableBody = document.querySelector('#test-table tbody');
+
+    function renderTestTable() {
+      tableBody.innerHTML = "";
+      testTransactions.forEach((t, i) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${t.description}</td>
+          <td>${t.amount}</td>
+          <td>${t.category}</td>
+          <td>${t.date}</td>
+          <td>
+            <button class="edit" data-index="${i}">Edit</button>
+            <button class="delete" data-index="${i}">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    document.getElementById('add-sample').addEventListener('click', () => {
+      testTransactions.push({
+        description: "Sample Lunch",
+        amount: 12.5,
+        category: "Food",
+        date: "2026-02-18"
+      });
+      renderTestTable();
+    });
+
+    tableBody.addEventListener('click', e => {
+      if (e.target.classList.contains('delete')) {
+        const idx = e.target.dataset.index;
+        testTransactions.splice(idx, 1);
+        renderTestTable();
+      }
+      if (e.target.classList.contains('edit')) {
+        const idx = e.target.dataset.index;
+        const newDesc = prompt("Edit description", testTransactions[idx].description);
+        if (newDesc) {
+          testTransactions[idx].description = newDesc;
+          renderTestTable();
+        }
+      }
+    });
+
+    const currencySelect = document.getElementById('test-currency');
+    currencySelect.value = currency;
+    currencySelect.addEventListener('change', e => {
+      setCurrency(e.target.value);
+      alert(`Currency changed to ${e.target.value} (test only)`);
+    });
+
+  </script>
+</body>
+</html>
