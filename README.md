@@ -37,3 +37,38 @@ A responsive, accessible, vanilla JS application to track student transactions, 
 ```bash
 git clone https://github.com/duwase7/Student-Finance-Tracker.git
 cd Student-Finance-Tracker
+
+ Development Milestones (M1–M7)
+
+ M1 – Spec & Wireframes
+- Initial specification outline
+- Validation & accessibility planning
+
+ M2 – Semantic HTML & Base CSS
+- Semantic HTML skeleton
+- Mobile-first CSS layout
+
+M3 – Forms & Regex Validation
+- Transaction form
+- 4+ regex rules
+- tests.html assertions
+
+ M4 – Render + Sort + Regex Search
+- Dynamic table rendering
+- Sorting logic
+- Safe regex compiler
+- Highlight matches
+
+M5 – Stats + Cap Logic
+- Dashboard metrics
+- Spending cap with ARIA live updates
+
+M6 – Persistence + Import/Export
+- localStorage
+- JSON round-trip validation
+- Currency settings
+
+ M7 – Polish & A11y Audit
+- UI improvements
+- Accessibility focus states
+- README
