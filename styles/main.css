@@ -11,8 +11,9 @@ html {
 }
 
 body {
-  background-color: #f7f7f7;
-  color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
 }
 
 .skip-link {
@@ -66,17 +67,18 @@ nav a:focus {
 }
 
 main {
-  max-width: 1024px;
-  margin: 1rem auto;
-  padding: 0 1rem;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
 }
 
+
 section {
-  background: #fff;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
 }
 
 h2 {
