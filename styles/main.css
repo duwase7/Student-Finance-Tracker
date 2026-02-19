@@ -127,21 +127,27 @@ select:focus {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 15px;
 }
 
 th, td {
+  padding: 10px;
   text-align: left;
-  padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
 }
 
 th[data-sort] {
   cursor: pointer;
 }
 
-tr:hover {
+th {
   background-color: #f1f1f1;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #eef6f2;
 }
 
 mark {
