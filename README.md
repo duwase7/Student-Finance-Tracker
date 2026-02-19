@@ -66,7 +66,7 @@ Development Milestones (M1–M7)
  M6 – Persistence + Import/Export
 - localStorage
 - JSON round-trip validation
-- Currency settings
+- Currency setting
 
  M7 – Polish & A11y Audit
 - UI improvements
